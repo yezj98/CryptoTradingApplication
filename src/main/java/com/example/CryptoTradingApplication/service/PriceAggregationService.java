@@ -1,7 +1,7 @@
 package com.example.CryptoTradingApplication.service;
 
 import com.example.CryptoTradingApplication.model.CryptoPriceModel;
-import com.example.CryptoTradingApplication.respository.CryptoPriceSourceRepository;
+import com.example.CryptoTradingApplication.respository.CryptoPriceSourceRespository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -15,17 +15,17 @@ import java.util.Map;
 public class PriceAggregationService {
 
     @Autowired
-    private final CryptoPriceSourceRepository cryptoPriceSourceRepository;
+    private final CryptoPriceSourceRespository cryptoPriceSourceRepository;
 
     @Autowired
     private final RestTemplate restTemplate;
 
-    public PriceAggregationService(CryptoPriceSourceRepository cryptoPriceSourceRepository, RestTemplate restTemplate) {
+    public PriceAggregationService(CryptoPriceSourceRespository cryptoPriceSourceRepository, RestTemplate restTemplate) {
         this.cryptoPriceSourceRepository = cryptoPriceSourceRepository;
         this.restTemplate = restTemplate;
     }
 
-//    @Scheduled(fixedRate = 10000)
+    @Scheduled(fixedRate = 10000)
     public void storeCryptoPriceFromAPI() {
         String huobiUrl = "https://api.huobi.pro/market/tickers";
         String binanceUrl = "https://api.binance.com/api/v3/ticker/bookTicker";

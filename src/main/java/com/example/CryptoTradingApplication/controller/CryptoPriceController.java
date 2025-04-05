@@ -1,9 +1,8 @@
 package com.example.CryptoTradingApplication.controller;
 
 import com.example.CryptoTradingApplication.model.CryptoPriceModel;
-import com.example.CryptoTradingApplication.respository.CryptoPriceSourceRepository;
+import com.example.CryptoTradingApplication.respository.CryptoPriceSourceRespository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +15,7 @@ import java.util.Map;
 @RequestMapping("/api/crypto/prices")
 public class CryptoPriceController {
     @Autowired
-    private CryptoPriceSourceRepository cryptoPriceSourceRepository;
+    private CryptoPriceSourceRespository cryptoPriceSourceRepository;
 
     @GetMapping("/latest")
     public ResponseEntity<Map<String, CryptoPriceModel>> getLatestPrices(){

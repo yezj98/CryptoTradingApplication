@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface CryptoPriceSourceRepository extends JpaRepository<CryptoPriceModel, Long> {
+public interface CryptoPriceSourceRespository extends JpaRepository<CryptoPriceModel, Long> {
     @Query("SELECT crypto FROM CryptoPriceModel crypto " +
             "WHERE crypto.symbol = :symbol " +
             "ORDER BY crypto.timestamp DESC, crypto.askPrice ASC LIMIT 1")
