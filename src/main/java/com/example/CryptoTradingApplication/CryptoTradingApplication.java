@@ -1,5 +1,8 @@
 package com.example.CryptoTradingApplication;
 
+import com.example.CryptoTradingApplication.model.CryptoPriceModel;
+import com.example.CryptoTradingApplication.respository.CryptoPriceSourceRepository;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -17,4 +20,6 @@ public class CryptoTradingApplication {
 	public RestTemplate restTemplate() {
 		return new RestTemplate();
 	}
+
+
 }

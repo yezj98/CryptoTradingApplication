@@ -25,7 +25,7 @@ public class CryptoPriceController {
         String[] symbols = {"ETHUSDT", "BTCUSDT"};
 
         for (String symbol : symbols) {
-            CryptoPriceModel price = cryptoPriceSourceRepository.findTopBySymbolOrderByTimestampDesc(symbol).orElse(null);
+            CryptoPriceModel price = cryptoPriceSourceRepository.findLatestBestPriceBySymbol(symbol).orElse(null);
             if (price != null) {
                 latestPrice.put(symbol, price);
             }

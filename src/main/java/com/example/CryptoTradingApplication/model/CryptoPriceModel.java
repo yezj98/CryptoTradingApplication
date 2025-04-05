@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
+@Table(name = "cryptoPrice")
 public class CryptoPriceModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

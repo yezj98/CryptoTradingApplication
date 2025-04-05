@@ -25,7 +25,7 @@ public class PriceAggregationService {
         this.restTemplate = restTemplate;
     }
 
-    @Scheduled(fixedRate = 10000)
+//    @Scheduled(fixedRate = 10000)
     public void storeCryptoPriceFromAPI() {
         String huobiUrl = "https://api.huobi.pro/market/tickers";
         String binanceUrl = "https://api.binance.com/api/v3/ticker/bookTicker";
