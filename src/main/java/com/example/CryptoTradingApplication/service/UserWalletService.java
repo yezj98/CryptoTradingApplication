@@ -19,7 +19,7 @@ public class UserWalletService {
     public List<UserWalletModel> getWalletBalances(String userId) {
         List<UserWalletModel> wallets = userWalletRepository.findByUserId(userId);
         if (wallets.isEmpty()) {
-            System.err.println("No wallet found");
+            throw new RuntimeException("No wallet found");
         }
         return wallets;
     }

@@ -20,12 +20,12 @@ public class TradeTransactionController {
     private TradeTransactionService tradeTransactionService;
 
     @GetMapping("/history")
-    public ResponseEntity <List<TradeTransactionModel>> getHistory (@RequestParam String userId) {
+    public ResponseEntity<?> getHistory(@RequestParam String userId) {
         try {
             List<TradeTransactionModel> transactions = tradeTransactionService.getTradingHistory(userId);
             return ResponseEntity.ok(transactions);
         } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 }

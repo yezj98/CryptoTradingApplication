@@ -20,20 +20,16 @@ public class CryptoPriceModel {
     @Column(name = "ASK_PRICE", nullable = false)
     private Double askPrice;
 
-    @Column(name = "SOURCE", nullable = false, length = 10)
-    private String source;
-
     @Column(name = "TIMESTAMP", nullable = false)
     private Timestamp timestamp;
 
     public CryptoPriceModel() {}
 
-    public CryptoPriceModel(String symbol, Double bidPrice, Double askPrice, String source, Timestamp timestamp) {
+    public CryptoPriceModel(String symbol, Double bidPrice, Double askPrice, Timestamp timestamp) {
         this.id = id;
         this.symbol = symbol;
         this.bidPrice = bidPrice;
         this.askPrice = askPrice;
-        this.source = source;
         this.timestamp = timestamp;
     }
 
@@ -68,15 +64,6 @@ public class CryptoPriceModel {
     public void setAskPrice(Double askPrice) {
         this.askPrice = askPrice;
     }
-
-    public String getSource() {
-        return source;
-    }
-
-    public void setSource(String source) {
-        this.source = source;
-    }
-
     public Timestamp getTimestamp() {
         return timestamp;
     }

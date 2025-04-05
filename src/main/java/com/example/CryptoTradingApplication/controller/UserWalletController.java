@@ -19,12 +19,12 @@ public class UserWalletController {
     private UserWalletService userWalletService;
 
     @GetMapping("/balance")
-    public ResponseEntity<List<UserWalletModel>> getWalletBalances(@RequestParam String userId) {
+    public ResponseEntity<?> getWalletBalances(@RequestParam String userId) {
         try {
             List<UserWalletModel> balance = userWalletService.getWalletBalances(userId);
             return ResponseEntity.ok(balance);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 }

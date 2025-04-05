@@ -1,7 +1,7 @@
 package com.example.CryptoTradingApplication.controller;
 
 import com.example.CryptoTradingApplication.model.CryptoPriceModel;
-import com.example.CryptoTradingApplication.respository.CryptoPriceSourceRespository;
+import com.example.CryptoTradingApplication.respository.CryptoPriceRespository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +15,7 @@ import java.util.Map;
 @RequestMapping("/api/crypto/prices")
 public class CryptoPriceController {
     @Autowired
-    private CryptoPriceSourceRespository cryptoPriceSourceRepository;
+    private CryptoPriceRespository cryptoPriceSourceRepository;
 
     @GetMapping("/latest")
     public ResponseEntity<Map<String, CryptoPriceModel>> getLatestPrices(){
@@ -24,7 +24,7 @@ public class CryptoPriceController {
         String[] symbols = {"ETHUSDT", "BTCUSDT"};
 
         for (String symbol : symbols) {
-            CryptoPriceModel price = cryptoPriceSourceRepository.findLatestBestPriceBySymbol(symbol).orElse(null);
+            CryptoPriceModel price = cryptoPriceSourceRepository.findLatestBestAskPriceBySymbol(symbol).orElseThrow(() -> new RuntimeException("Crypto not found"));
             if (price != null) {
                 latestPrice.put(symbol, price);
             }
