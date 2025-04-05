@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-public class CryptoPrice {
+public class CryptoPriceModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,9 +25,9 @@ public class CryptoPrice {
     @Column(name = "TIMESTAMP", nullable = false)
     private Timestamp timestamp;
 
-    public CryptoPrice() {}
+    public CryptoPriceModel() {}
 
-    public CryptoPrice(String symbol, Double bidPrice, Double askPrice, String source, Timestamp timestamp) {
+    public CryptoPriceModel(String symbol, Double bidPrice, Double askPrice, String source, Timestamp timestamp) {
         this.id = id;
         this.symbol = symbol;
         this.bidPrice = bidPrice;

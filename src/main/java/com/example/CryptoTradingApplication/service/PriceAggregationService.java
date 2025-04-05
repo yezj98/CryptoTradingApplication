@@ -1,6 +1,6 @@
 package com.example.CryptoTradingApplication.service;
 
-import com.example.CryptoTradingApplication.model.CryptoPrice;
+import com.example.CryptoTradingApplication.model.CryptoPriceModel;
 import com.example.CryptoTradingApplication.respository.CryptoPriceSourceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -32,15 +32,15 @@ public class PriceAggregationService {
 
         try {
             Map<String, Object> huobiResponse = restTemplate.getForObject(huobiUrl, Map.class);
-            Map<String, Object> binanceResponse = restTemplate.getForObject(binanceUrl, Map.class);
+//            Map<String, Object> binanceResponse = restTemplate.getForObject(binanceUrl, Map.class);
 
-            if (huobiResponse == null || !huobiResponse.containsKey("data") || binanceResponse == null || !binanceResponse.containsKey("data")) {
+            if (huobiResponse == null || !huobiResponse.containsKey("data") ) {
                 System.err.println("Invalid response from API");
                 return;
             }
 
             List<Map<String, Object>> huobiTicker = (List<Map<String, Object>>) huobiResponse.get("data");
-            List<Map<String, Object>> binanceTicker = (List<Map<String, Object>>) binanceResponse.get("data");
+//            List<Map<String, Object>> binanceTicker = (List<Map<String, Object>>) binanceResponse.get("data");
 
             //Crypto Price From HUOBI
             for (Map<String, Object> ticker : huobiTicker) {
@@ -50,7 +50,7 @@ public class PriceAggregationService {
                     Double askPrice = Double.valueOf(ticker.get("ask").toString());
                     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
-                    CryptoPrice price = new CryptoPrice(
+                    CryptoPriceModel price = new CryptoPriceModel(
                             symbol.toUpperCase(),
                             bidPrice,
                             askPrice,
@@ -63,24 +63,24 @@ public class PriceAggregationService {
             }
 
             //Crypto Price From BINANCE
-            for (Map<String, Object> ticker : binanceTicker) {
-                String symbol = (String) ticker.get("symbol");
-                if (symbol.equalsIgnoreCase("ethusdt") || symbol.equalsIgnoreCase("btcusdt")) {
-                    Double bidPrice = Double.valueOf(ticker.get("bid").toString());
-                    Double askPrice = Double.valueOf(ticker.get("ask").toString());
-                    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-
-                    CryptoPrice price = new CryptoPrice(
-                            symbol.toUpperCase(),
-                            bidPrice,
-                            askPrice,
-                            "BINANCE",
-                            timestamp
-                    );
-                    cryptoPriceSourceRepository.save(price);
-                    System.out.println("Save Binance price successfully for " + symbol + ": Bid=" + bidPrice + ", Ask=" + askPrice);
-                }
-            }
+//            for (Map<String, Object> ticker : binanceTicker) {
+//                String symbol = (String) ticker.get("symbol");
+//                if (symbol.equalsIgnoreCase("ethusdt") || symbol.equalsIgnoreCase("btcusdt")) {
+//                    Double bidPrice = Double.valueOf(ticker.get("bid").toString());
+//                    Double askPrice = Double.valueOf(ticker.get("ask").toString());
+//                    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+//
+//                    CryptoPriceModel price = new CryptoPriceModel(
+//                            symbol.toUpperCase(),
+//                            bidPrice,
+//                            askPrice,
+//                            "BINANCE",
+//                            timestamp
+//                    );
+//                    cryptoPriceSourceRepository.save(price);
+//                    System.out.println("Save Binance price successfully for " + symbol + ": Bid=" + bidPrice + ", Ask=" + askPrice);
+//                }
+//            }
         }catch (Exception e) {
             System.err.println(e.getMessage());
         }
