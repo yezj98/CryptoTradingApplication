@@ -9,10 +9,10 @@ public class UserWalletModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "userId", nullable = false)
+    @Column(name = "userId", nullable = false, length = 40)
     private String userId;
 
-    @Column(name = "currency", nullable = false)
+    @Column(name = "currency", nullable = false, length = 18)
     private String currency;
 
     @Column(name = "balance",nullable = false)
